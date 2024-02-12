@@ -4,12 +4,39 @@ name: systranything
 version: 0.1.0.0
 build-type: Simple
 
-common defaults
+executable systranything
+  main-is:
+    Main.hs
+  hs-source-dirs:
+    systranything
+  other-modules:
+    Model.Checkbox
+    Model.Command
+    Model.Indicator
+    Model.Internal
+    Model.Item
+    Model.Label
+    Model.RadioGroup
+    Model.RadioButton
+    Model.Root
+    Model.SubMenu
+    Options
+  build-depends:
+    aeson,
+    base,
+    gi-ayatana-appindicator3,
+    gi-glib,
+    gi-gtk,
+    optparse-applicative,
+    text,
+    unliftio,
+    yaml,
   default-language:
     Haskell2010
   default-extensions:
     DeriveGeneric
     DerivingStrategies
+    OverloadedLabels
     OverloadedStrings
     RecordWildCards
     ScopedTypeVariables
@@ -23,23 +50,5 @@ common defaults
     -Wpartial-fields
     -Wredundant-constraints
     -Wunused-packages
-
-executable systranything
-  import:
-    defaults
-  main-is:
-    Main.hs
-  hs-source-dirs:
-    systranything
-  other-modules:
-    Model
-    Model.Internal
-    Options
-  build-depends:
-    aeson,
-    base,
-    gi-ayatana-appindicator3,
-    optparse-applicative,
-    text,
-    unliftio,
-    yaml,
+    -threaded
+    -with-rtsopts=-N
