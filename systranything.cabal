@@ -12,6 +12,7 @@ executable systranything
   other-modules:
     Model.Checkbox
     Model.Command
+    Model.Common
     Model.Indicator
     Model.Internal
     Model.Item
@@ -29,6 +30,7 @@ executable systranything
     gi-gtk,
     optparse-applicative,
     text,
+    typed-process,
     unliftio,
     yaml,
   default-language:
