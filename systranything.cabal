@@ -25,6 +25,8 @@ executable systranything
   build-depends:
     aeson,
     base,
+    bytestring,
+    extra,
     gi-ayatana-appindicator3,
     gi-glib,
     gi-gtk,

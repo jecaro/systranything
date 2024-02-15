@@ -2,12 +2,12 @@ module Main (main) where
 
 import Control.Exception (Exception (..), SomeException)
 import Control.Monad (void)
-import Data.Text (Text)
+import Data.Foldable (traverse_)
 import Data.Yaml (decodeFileThrow, prettyPrintParseException)
-import qualified GI.AyatanaAppIndicator3 as AI
 import qualified GI.GLib as GLib
 import qualified GI.Gtk as Gtk
-import Model.Indicator (Indicator (..))
+import Model.Command (periodicallyUpdateIcon)
+import Model.Indicator (Indicator (..), newIndicator)
 import Model.Item (populate)
 import Model.Root (Root (..))
 import Options (Options (..), parseArgs)
@@ -26,26 +26,11 @@ main = do
 
     menu <- Gtk.menuNew
     populate opVerbose menu roMenu
-    indicator <- initIndicator inIcon menu
 
-    mainLoop <- GLib.mainLoopNew Nothing False
+    indicator <- newIndicator inIcon menu
+    traverse_ (periodicallyUpdateIcon opVerbose indicator inIcon) inCommand
 
-    -- Make sure the indicator is not garbage collected
-    Gtk.withManagedPtr indicator . const $
-      GLib.mainLoopRun mainLoop
-
-initIndicator :: Text -> Gtk.Menu -> IO AI.Indicator
-initIndicator icon menu = do
-  indicator <-
-    AI.indicatorNew
-      "systranything"
-      icon
-      AI.IndicatorCategorySystemServices
-
-  -- The indicator beeing not active by default means it is hidden
-  AI.indicatorSetStatus indicator AI.IndicatorStatusActive
-  AI.indicatorSetMenu indicator $ Just menu
-  pure indicator
+    GLib.mainLoopRun =<< GLib.mainLoopNew Nothing False
 
 exceptions :: SomeException -> IO ()
 exceptions e = hPutStr stderr message >> exitFailure

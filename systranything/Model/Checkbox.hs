@@ -31,7 +31,7 @@ runOnToggle :: Bool -> Text -> Text -> Gtk.CheckMenuItem -> IO ()
 runOnToggle verbose commandOn commandOff menuItem =
   void . Gtk.on menuItem #toggled $ do
     isActive <- Gtk.checkMenuItemGetActive menuItem
-    runCommand verbose $
+    void . runCommand verbose $
       if isActive
         then commandOn
         else commandOff
