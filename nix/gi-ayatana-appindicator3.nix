@@ -8,8 +8,8 @@
 let
   haskell-gi-src = fetchgit ({
     url = "https://github.com/jecaro/haskell-gi.git";
-    rev = "2a96f200288587f294449e7d3b98f3ef56ef0589";
-    sha256 = "sha256-ySH+fcRjofd70XrnKQ8oSCMwGh9zWN4p8zfrAKNqvnY=";
+    rev = "936b5ed0863a1663ea7775bc5f3ab4f9ae315ae9";
+    sha256 = "sha256-SpcQDuIlyITOzPou1OnKbvdvK5TnYpsM/YR44Ljsfyg=";
   });
 
   genBuildInfo = haskellPackages.callCabal2nix "genBuildInfo"
