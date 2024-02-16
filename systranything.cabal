@@ -29,6 +29,7 @@ executable systranything
     extra,
     gi-ayatana-appindicator3,
     gi-glib,
+    gi-gobject,
     gi-gtk,
     optparse-applicative,
     text,
@@ -45,6 +46,7 @@ executable systranything
     RecordWildCards
     ScopedTypeVariables
     StrictData
+    TupleSections
   ghc-options:
     -Wall
     -Wcompat

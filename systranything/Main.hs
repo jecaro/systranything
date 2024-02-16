@@ -24,11 +24,10 @@ main = do
 
     void . Gtk.init $ Nothing
 
-    menu <- Gtk.menuNew
-    populate opVerbose menu roMenu
+    menu <- populate opVerbose roMenu
 
     indicator <- newIndicator inIcon menu
-    traverse_ (periodicallyUpdateIcon opVerbose indicator inIcon) inCommand
+    traverse_ (periodicallyUpdateIcon False indicator inIcon) inCommand
 
     GLib.mainLoopRun =<< GLib.mainLoopNew Nothing False
 

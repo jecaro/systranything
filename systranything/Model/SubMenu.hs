@@ -4,6 +4,7 @@ module Model.SubMenu (SubMenu (..), newItem) where
 
 import Data.Aeson.TH (deriveJSON)
 import Data.List.NonEmpty (NonEmpty)
+import qualified Data.List.NonEmpty as NE
 import Data.Text (Text)
 import GHC.Generics (Generic)
 import qualified GI.Gtk as Gtk
@@ -20,8 +21,7 @@ $(deriveJSON options ''SubMenu)
 
 newItem :: Bool -> SubMenu -> IO Gtk.MenuItem
 newItem verbose (MkSubMenu {..}) = do
-  subMenu <- Gtk.menuNew
-  menu <- Gtk.menuItemNewWithLabel suLabel
-  Gtk.menuItemSetSubmenu menu (Just subMenu)
-  populate verbose subMenu suItems
-  pure menu
+  subMenu <- populate verbose $ NE.toList suItems
+  item <- Gtk.menuItemNewWithLabel suLabel
+  Gtk.menuItemSetSubmenu item $ Just subMenu
+  pure item

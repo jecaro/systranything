@@ -10,8 +10,7 @@ import Model.Internal (options)
 
 data RadioButton = MkRadioButton
   { raLabel :: Text,
-    raCommandOn :: Text,
-    raCommandOff :: Text
+    raOnClick :: Text
   }
   deriving stock (Generic, Show)
 

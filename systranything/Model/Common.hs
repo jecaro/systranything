@@ -17,16 +17,18 @@ runCommand verbose command = do
 
   let stdoutTxt = T.decodeUtf8Lenient (LBS.toStrict stdoutBS)
 
-  when (exitCode /= ExitSuccess)
-    . T.putStrLn
-    $ "Command failed: " <> command
+  when (exitCode /= ExitSuccess) $ do
+    T.putStrLn "Command failed: "
+    T.putStrLn command
 
   when (verbose || exitCode /= ExitSuccess) $ do
     let stderrTxt = T.decodeUtf8Lenient (LBS.toStrict stderrBS)
-    T.putStrLn $ "stdout: " <> stdoutTxt
-    T.putStrLn $ "stderr: " <> stderrTxt
+    T.putStrLn "stdout: "
+    T.putStrLn stdoutTxt
+    T.putStrLn "stderr: "
+    T.putStrLn stderrTxt
 
   pure $
     if exitCode /= ExitSuccess
       then Nothing
-      else Just stdoutTxt
+      else Just $ T.stripEnd stdoutTxt

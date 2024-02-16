@@ -1,37 +1,43 @@
 {-# LANGUAGE TemplateHaskell #-}
 
-module Model.Checkbox (Checkbox (..), runOnToggle, newItem) where
+module Model.Checkbox (Checkbox (..), newItem, runCommandOnToggleActive) where
 
-import Control.Monad (void)
+import Control.Monad (void, when)
 import Data.Aeson.TH (deriveJSON)
+import Data.Maybe (isJust)
 import Data.Text (Text)
+import Foreign.C (CULong)
 import GHC.Generics (Generic)
+import qualified GI.GObject as GObject
 import qualified GI.Gtk as Gtk
 import Model.Common (runCommand)
 import Model.Internal (options)
 
 data Checkbox = MkCheckbox
   { chLabel :: Text,
-    chCommandOn :: Text,
-    chCommandOff :: Text,
-    chChecked :: Bool
+    chOnClick :: Text,
+    chOnGetStatus :: Text
   }
   deriving stock (Generic, Show)
 
 $(deriveJSON options ''Checkbox)
 
-newItem :: Bool -> Checkbox -> IO Gtk.CheckMenuItem
+newItem :: Bool -> Checkbox -> IO (Gtk.CheckMenuItem, IO ())
 newItem verbose MkCheckbox {..} = do
-  menuItem <- Gtk.checkMenuItemNewWithLabel chLabel
-  Gtk.checkMenuItemSetActive menuItem chChecked
-  runOnToggle verbose chCommandOn chCommandOff menuItem
-  pure menuItem
+  item <- Gtk.checkMenuItemNewWithLabel chLabel
 
-runOnToggle :: Bool -> Text -> Text -> Gtk.CheckMenuItem -> IO ()
-runOnToggle verbose commandOn commandOff menuItem =
-  void . Gtk.on menuItem #toggled $ do
-    isActive <- Gtk.checkMenuItemGetActive menuItem
-    void . runCommand verbose $
-      if isActive
-        then commandOn
-        else commandOff
+  signalId <- runCommandOnToggleActive verbose chOnClick item
+
+  pure (item, updateAction item signalId)
+  where
+    updateAction item signalId = do
+      mbOutput <- runCommand verbose chOnGetStatus
+      GObject.signalHandlerBlock item signalId
+      Gtk.checkMenuItemSetActive item $ isJust mbOutput
+      GObject.signalHandlerUnblock item signalId
+
+runCommandOnToggleActive :: Bool -> Text -> Gtk.CheckMenuItem -> IO CULong
+runCommandOnToggleActive verbose command item =
+  Gtk.on item #toggled $ do
+    isActive <- Gtk.checkMenuItemGetActive item
+    when isActive . void $ runCommand verbose command

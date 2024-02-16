@@ -12,7 +12,7 @@ import Model.Internal (options)
 
 data Label = MkLabel
   { laLabel :: Text,
-    laCommand :: Text
+    laOnClick :: Text
   }
   deriving stock (Generic, Show)
 
@@ -20,6 +20,6 @@ $(deriveJSON options ''Label)
 
 newItem :: Bool -> Label -> IO Gtk.MenuItem
 newItem verbose MkLabel {..} = do
-  menuItem <- Gtk.menuItemNewWithLabel laLabel
-  void . Gtk.on menuItem #activate . void $ runCommand verbose laCommand
-  pure menuItem
+  item <- Gtk.menuItemNewWithLabel laLabel
+  void . Gtk.on item #activate . void $ runCommand verbose laOnClick
+  pure item
