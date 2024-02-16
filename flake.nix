@@ -38,15 +38,15 @@
       checks = self.packages;
 
       devShell = forAllSystems (system:
-        let haskellPackages = nixpkgsFor.${system}.haskellPackages;
+        let pkgs = nixpkgsFor.${system};
         in
-        haskellPackages.shellFor {
+        pkgs.haskellPackages.shellFor {
           packages = p: [ self.packages.${system}.systranything ];
           withHoogle = true;
           buildInputs = [
-            haskellPackages.haskell-language-server
-            haskellPackages.ghcid
-            haskellPackages.cabal-install
+            pkgs.haskellPackages.haskell-language-server
+            pkgs.haskellPackages.ghcid
+            pkgs.haskellPackages.cabal-install
           ];
         });
     };
