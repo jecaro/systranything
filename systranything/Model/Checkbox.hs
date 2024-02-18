@@ -1,8 +1,8 @@
 {-# LANGUAGE TemplateHaskell #-}
 
-module Model.Checkbox (Checkbox (..), newItem, runCommandOnToggleActive) where
+module Model.Checkbox (Checkbox (..), newItem) where
 
-import Control.Monad (void, when)
+import Control.Monad (void)
 import Data.Aeson.TH (deriveJSON)
 import Data.Maybe (isJust)
 import Data.Text (Text)
@@ -26,7 +26,7 @@ newItem :: Bool -> Checkbox -> IO (Gtk.CheckMenuItem, IO ())
 newItem verbose MkCheckbox {..} = do
   item <- Gtk.checkMenuItemNewWithLabel chLabel
 
-  signalId <- runCommandOnToggleActive verbose chOnClick item
+  signalId <- runCommandOnToggle verbose chOnClick item
 
   pure (item, updateAction item signalId)
   where
@@ -36,8 +36,6 @@ newItem verbose MkCheckbox {..} = do
       Gtk.checkMenuItemSetActive item $ isJust mbOutput
       GObject.signalHandlerUnblock item signalId
 
-runCommandOnToggleActive :: Bool -> Text -> Gtk.CheckMenuItem -> IO CULong
-runCommandOnToggleActive verbose command item =
-  Gtk.on item #toggled $ do
-    isActive <- Gtk.checkMenuItemGetActive item
-    when isActive . void $ runCommand verbose command
+runCommandOnToggle :: Bool -> Text -> Gtk.CheckMenuItem -> IO CULong
+runCommandOnToggle verbose command item =
+  Gtk.on item #toggled . void $ runCommand verbose command

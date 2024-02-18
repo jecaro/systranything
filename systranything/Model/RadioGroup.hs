@@ -2,16 +2,17 @@
 
 module Model.RadioGroup (RadioGroup (..), newItems) where
 
+import Control.Monad (void, when)
 import Data.Aeson.TH (deriveJSON)
 import Data.Foldable (traverse_)
 import Data.List.NonEmpty (NonEmpty (..))
 import qualified Data.List.NonEmpty as NE
 import Data.Maybe (fromMaybe)
 import Data.Text (Text)
+import Foreign.C (CULong)
 import GHC.Generics (Generic)
 import qualified GI.GObject as GI
 import qualified GI.Gtk as Gtk
-import Model.Checkbox (runCommandOnToggleActive)
 import Model.Common (runCommand)
 import Model.Internal (options)
 import Model.RadioButton (RadioButton (..))
@@ -50,3 +51,9 @@ newItems verbose MkRadioGroup {..} = do
       GI.signalHandlerBlock item signalId
       Gtk.setCheckMenuItemActive item $ label == selected
       GI.signalHandlerUnblock item signalId
+
+runCommandOnToggleActive :: Bool -> Text -> Gtk.CheckMenuItem -> IO CULong
+runCommandOnToggleActive verbose command item =
+  Gtk.on item #toggled $ do
+    isActive <- Gtk.checkMenuItemGetActive item
+    when isActive . void $ runCommand verbose command
