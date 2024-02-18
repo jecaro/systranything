@@ -14,13 +14,26 @@
     in
     {
       overlay = (final: prev:
+        let
+          gi-ayatana-appindicator3 = prev.haskellPackages.callHackageDirect
+            {
+              pkg = "gi-ayatana-appindicator3";
+              ver = "0.1.0";
+              sha256 = "sha256-Jcv6hUtyCvfkgbvQqo5H+J8h9rrPAkQdOeheWcqMphg=";
+            }
+            {
+              ayatana-appindicator3 = prev.libayatana-appindicator;
+            };
+        in
         {
+          # genBuildInfo translates the line in pkg.info:
+          #   "pkgconfigDepends": "ayatana-appindicator3-0.1"
+          # to the pkg-config dependency: "ayatana-appindicator3"
+          # however the nixpkgs package is actually libayatana-appindicator
           systranything = prev.haskellPackages.callCabal2nix
             "systranything" ./.
             {
-              gi-ayatana-appindicator3 = prev.callPackage
-                ./nix/gi-ayatana-appindicator3.nix
-                { };
+              inherit gi-ayatana-appindicator3;
             };
         });
 
