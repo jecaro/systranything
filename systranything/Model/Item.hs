@@ -24,6 +24,7 @@ data Item
   | MkItemCheckbox Checkbox
   | MkItemRadioGroup RadioGroup
   | MkItemSubMenu SubMenu
+  | MkItemSeparator
   deriving stock (Generic, Show)
 
 $(deriveJSON options ''Item)
@@ -59,3 +60,5 @@ newItem verbose (MkItemRadioGroup group) = do
   pure (menuItems, updateAction)
 newItem verbose (MkItemSubMenu submenu) =
   (,mempty) . singleton <$> SubMenu.newItem verbose submenu
+newItem _ MkItemSeparator =
+  (,mempty) . singleton <$> (Gtk.toMenuItem =<< Gtk.separatorMenuItemNew)
