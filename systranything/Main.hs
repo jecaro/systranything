@@ -2,12 +2,10 @@ module Main (main) where
 
 import Control.Exception (Exception (..), SomeException)
 import Control.Monad (void)
-import Data.Foldable (traverse_)
 import Data.Yaml (decodeFileThrow, prettyPrintParseException)
 import qualified GI.GLib as GLib
 import qualified GI.Gtk as Gtk
-import Model.Command (periodicallyUpdateIcon)
-import Model.Indicator (Indicator (..), newIndicator)
+import Model.Indicator (newIndicator)
 import Model.Item (populate)
 import Model.Root (Root (..))
 import Options (Options (..), parseArgs)
@@ -20,14 +18,11 @@ main = do
   MkOptions {..} <- parseArgs
 
   handleAny exceptions $ do
-    MkRoot {roIndicator = MkIndicator {..}, ..} <- decodeFileThrow opFilename
+    MkRoot {..} <- decodeFileThrow opFilename
 
     void . Gtk.init $ Nothing
 
-    menu <- populate opVerbose roMenu
-
-    indicator <- newIndicator inIcon menu
-    traverse_ (periodicallyUpdateIcon False indicator inIcon) inCommand
+    newIndicator opVerbose roIndicator =<< populate opVerbose roMenu
 
     GLib.mainLoopRun =<< GLib.mainLoopNew Nothing False
 

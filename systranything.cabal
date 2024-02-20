@@ -30,6 +30,7 @@ executable systranything
     gi-ayatana-appindicator3,
     gi-glib,
     gi-gobject,
+    gi-gdk,
     gi-gtk,
     optparse-applicative,
     text,
