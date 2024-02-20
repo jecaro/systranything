@@ -25,7 +25,7 @@ data Indicator = MkIndicator
 
 $(deriveJSON options ''Indicator)
 
-newIndicator :: Bool -> Indicator -> Gtk.Menu -> IO ()
+newIndicator :: Bool -> Indicator -> Maybe Gtk.Menu -> IO ()
 newIndicator verbose indicator@MkIndicator {..} menu = do
   gtkIndicator <-
     AI.indicatorNew
@@ -35,7 +35,7 @@ newIndicator verbose indicator@MkIndicator {..} menu = do
 
   -- The indicator beeing not active by default means it is hidden
   AI.indicatorSetStatus gtkIndicator AI.IndicatorStatusActive
-  AI.indicatorSetMenu gtkIndicator $ Just menu
+  AI.indicatorSetMenu gtkIndicator menu
 
   traverse_ (periodicallyUpdateIcon False gtkIndicator inIcon) inCommand
 

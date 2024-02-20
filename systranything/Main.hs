@@ -22,7 +22,8 @@ main = do
 
     void . Gtk.init $ Nothing
 
-    newIndicator opVerbose roIndicator =<< populate opVerbose roMenu
+    mbMenu <- traverse (populate opVerbose) roMenu
+    newIndicator opVerbose roIndicator mbMenu
 
     GLib.mainLoopRun =<< GLib.mainLoopNew Nothing False
 

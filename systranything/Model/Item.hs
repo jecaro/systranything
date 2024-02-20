@@ -6,6 +6,7 @@ import Control.Monad (void)
 import Data.Aeson.TH (deriveJSON)
 import Data.Foldable (traverse_)
 import Data.List (singleton)
+import Data.List.NonEmpty (NonEmpty)
 import qualified Data.List.NonEmpty as NE
 import GHC.Generics (Generic)
 import qualified GI.Gtk as Gtk
@@ -29,7 +30,7 @@ data Item
 
 $(deriveJSON options ''Item)
 
-populate :: Bool -> [Item] -> IO Gtk.Menu
+populate :: Bool -> NonEmpty Item -> IO Gtk.Menu
 populate verbose items = do
   menu <- Gtk.menuNew
   updateStateActions <- traverse (initAppendAndShow menu) items
