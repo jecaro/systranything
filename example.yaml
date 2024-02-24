@@ -1,0 +1,106 @@
+# Parameters for the icon present in the system tray
+indicator:
+  # The default icon. It can be either a path to an image either the name of a
+  # GTK icon like the following.
+  icon: dialog-warning
+  # Optional: A command can be triggered periodically to change the current
+  # icon
+  command:
+    # Run every 3 seconds
+    pooling-interval: 3
+    # The other icons
+    icons:
+    - dialog-error
+    - dialog-question
+    # The command to be run. It must output the index of the icon to show. 0
+    # being the default icon. Other icon indexes start at 1.
+    on-timeout: |
+        # This snippet increments a counter between zero and two. Its stores
+        # its state in the `indicator` file.
+        if [ ! -f indicator ]; then
+          echo -1 > indicator
+        fi
+
+        current=$(cat indicator)
+        next=$((($current + 1) % 3))
+
+        echo $next > indicator
+        cat indicator
+  # Optional: A callback for scroll up events
+  on-scroll-up: echo scroll up
+  # Optional: A callback for scroll down events
+  on-scroll-down: echo scroll down
+
+# Optional: A context menu
+menu:
+# A simple label which triggers a command
+- item-label:
+    label: Hello
+    on-click: zenity --info --text=Hello
+
+# A checkbox
+- item-checkbox:
+    label: A checkbox
+    # The command to toggle the state of the checkbox
+    on-click: |
+      if [ -f checkbox-file ] ; then
+        rm checkbox-file
+      else
+        touch checkbox-file
+      fi
+    # If that next command outputs any text, the checkbox will appear as
+    # checked
+    on-get-status: ls checkbox-file
+
+# Sub-menus are possible too
+- item-sub-menu:
+    # With the label
+    label: A submenu
+
+    # And a list of items
+    items:
+
+      # A group of radio buttons
+      - item-radio-group:
+          # The default choice
+          default: No choice
+
+          # The list of the other buttons and callbacks
+          buttons:
+
+          - label: No choice
+            on-click: |
+              rm -f radio-file-1 radio-file-2
+
+          - label: Choice 1
+            on-click: |
+              rm -f radio-file-2
+              touch radio-file-1
+
+          - label: Choice 2
+            on-click: |
+              rm -f radio-file-1
+              touch radio-file-2
+
+          # That command must output the label of the currently selected button.
+          # systranything will fallback on the default if needed.
+          on-get-status: |
+            if [ -f radio-file-1 ] ; then
+              echo "Choice 1"
+            elif [ -f radio-file-2 ] ; then
+              echo "Choice 2"
+            else
+              echo "None"
+            fi
+
+      - item-separator: []
+
+      - item-label:
+          label: Another label
+          on-click: ""
+
+- item-separator: []
+
+- item-label:
+    label: Quit
+    on-click: pkill systranything
