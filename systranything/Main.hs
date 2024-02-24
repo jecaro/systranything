@@ -23,9 +23,12 @@ main = do
     void . Gtk.init $ Nothing
 
     mbMenu <- traverse (populate opVerbose) roMenu
-    newIndicator opVerbose roIndicator mbMenu
+    indicator <- newIndicator opVerbose roIndicator mbMenu
 
-    GLib.mainLoopRun =<< GLib.mainLoopNew Nothing False
+    -- Make sure the indicator is not garbage collected. That's mandatory for
+    -- the case when there is no periodic update to keep the indicator alive.
+    Gtk.withManagedPtr indicator . const $
+      GLib.mainLoopRun =<< GLib.mainLoopNew Nothing False
 
 exceptions :: SomeException -> IO ()
 exceptions e = hPutStr stderr message >> exitFailure

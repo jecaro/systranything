@@ -25,7 +25,7 @@ data Indicator = MkIndicator
 
 $(deriveJSON options ''Indicator)
 
-newIndicator :: Bool -> Indicator -> Maybe Gtk.Menu -> IO ()
+newIndicator :: Bool -> Indicator -> Maybe Gtk.Menu -> IO AI.Indicator
 newIndicator verbose indicator@MkIndicator {..} menu = do
   gtkIndicator <-
     AI.indicatorNew
@@ -40,6 +40,8 @@ newIndicator verbose indicator@MkIndicator {..} menu = do
   traverse_ (periodicallyUpdateIcon False gtkIndicator inIcon) inCommand
 
   onScrollEvent verbose gtkIndicator indicator
+
+  pure gtkIndicator
 
 onScrollEvent :: Bool -> AI.Indicator -> Indicator -> IO ()
 onScrollEvent verbose indicator (MkIndicator {..}) = do
