@@ -50,7 +50,7 @@ menu:
       fi
     # If that next command outputs any text, the checkbox will appear as
     # checked
-    on-get-status: ls checkbox-file
+    on-get-status: ls checkbox-file || true
 
 # Sub-menus are possible too
 - item-sub-menu:

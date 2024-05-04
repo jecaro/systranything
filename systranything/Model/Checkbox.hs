@@ -4,8 +4,8 @@ module Model.Checkbox (Checkbox (..), newItem) where
 
 import Control.Monad (void)
 import Data.Aeson.TH (deriveJSON)
-import Data.Maybe (isJust)
 import Data.Text (Text)
+import qualified Data.Text as T
 import Foreign.C (CULong)
 import GHC.Generics (Generic)
 import qualified GI.GObject as GObject
@@ -32,8 +32,9 @@ newItem verbose MkCheckbox {..} = do
   where
     updateAction item signalId = do
       mbOutput <- runCommand verbose chOnGetStatus
+      let active = maybe False (not . T.null) mbOutput
       GObject.signalHandlerBlock item signalId
-      Gtk.checkMenuItemSetActive item $ isJust mbOutput
+      Gtk.checkMenuItemSetActive item active
       GObject.signalHandlerUnblock item signalId
 
 runCommandOnToggle :: Bool -> Text -> Gtk.CheckMenuItem -> IO CULong
