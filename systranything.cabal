@@ -2,6 +2,13 @@ cabal-version: 2.2
 
 name: systranything
 version: 0.1.0.0
+synopsis: Let you put anything in the system tray
+homepage: https://github.com/jecaro/systranything
+author: Jean-Charles Quillet
+maintainer: jeancharles.quillet@gmail.com
+license: MIT
+license-file: LICENSE
+category: Desktop
 build-type: Simple
 
 executable systranything
@@ -24,7 +31,7 @@ executable systranything
     Options
   build-depends:
     aeson,
-    base,
+    base >= 4.17 && < 5,
     bytestring,
     extra,
     gi-ayatana-appindicator3,
