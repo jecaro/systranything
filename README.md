@@ -2,20 +2,29 @@
 
 [![CI][status-png]][status]
 
-`systranything` lets you put anything in your system tray. It uses a YAML file 
-which describes the icon to put in the system tray along a context menu and 
-callbacks to be executed in a shell.
+`systranything` lets you put anything in your system tray. It is supported by 
+all destop environment that implements the [StatusNotifierHost 
+specification][status-notifier-host] from [freedesktop.org][freedesktop] 
+([KDE][kde], [XFCE][xfce], ...).
+
+It uses a YAML file which describes the icon to put in the system tray along a 
+context menu and callbacks to be executed in a shell.
 
 The menu can contain labels, separators, submenus, checkboxes and radiobuttons. 
 Scroll events can be triggered on the main icon.
 
-Things you can do with it:
+Among other things, I use it to change my VPN settings. The icon shows its 
+current status:
+
+![demo](./demo.gif)
+
+What you can do with it:
 
 - a custom launcher menu
 - a volume icon
 - a menu to turn on or off your VPN
 - a menu to toggle dual monitor setups
-- anything that requires a status icon and actions
+- anything that requires a status icon and scriptable actions
 
 See [the example file](example.yaml) to get started.
 
@@ -56,6 +65,11 @@ You will be dropped in a shell with all the needed tools in scope: `cabal` to
 build the project and `haskell-language-server` for a better developer 
 experience.
 
+[freedesktop]: https://www.freedesktop.org/wiki/
+[kde]: https://kde.org/
 [nix]: https://nixos.org/
+[polybar]: https://polybar.github.io/
+[status-notifier-host]: https://www.freedesktop.org/wiki/Specifications/StatusNotifierItem/StatusNotifierHost/
 [status-png]: https://github.com/jecaro/systranything/workflows/CI/badge.svg
+[xfce]: https://www.xfce.org/
 [status]: https://github.com/jecaro/systranything/actions
