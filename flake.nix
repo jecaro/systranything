@@ -57,10 +57,11 @@
           packages = p: [ self.packages.${system}.systranything ];
           withHoogle = true;
           buildInputs = [
-            pkgs.haskellPackages.haskell-language-server
-            pkgs.haskellPackages.ghcid
-            pkgs.haskellPackages.cabal-install
             pkgs.gnome.zenity
+            pkgs.haskellPackages.cabal-install
+            pkgs.haskellPackages.ghcid
+            pkgs.haskellPackages.haskell-ci
+            pkgs.haskellPackages.haskell-language-server
           ];
         });
     };
