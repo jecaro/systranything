@@ -1,6 +1,7 @@
 # Systranything
 
-[![CI][status-png]][status]
+[![nix][status-nix-png]][status-nix] 
+[![haskell-ci][status-haskell-ci-png]][status-haskell-ci]
 
 `systranything` lets you put anything in your system tray. It is supported by 
 all destop environment that implements the [StatusNotifierHost 
@@ -70,6 +71,8 @@ experience.
 [nix]: https://nixos.org/
 [polybar]: https://polybar.github.io/
 [status-notifier-host]: https://www.freedesktop.org/wiki/Specifications/StatusNotifierItem/StatusNotifierHost/
-[status-png]: https://github.com/jecaro/systranything/workflows/CI/badge.svg
+[status-nix-png]: https://github.com/jecaro/systranything/workflows/nix/badge.svg
+[status-haskell-ci-png]: https://github.com/jecaro/systranything/workflows/Haskell-CI/badge.svg
 [xfce]: https://www.xfce.org/
-[status]: https://github.com/jecaro/systranything/actions
+[status-nix]: https://github.com/jecaro/systranything/actions/workflows/nix.yml
+[status-haskell-ci]: https://github.com/jecaro/systranything/actions/workflows/haskell-ci.yml
