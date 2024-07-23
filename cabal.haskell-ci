@@ -4,3 +4,4 @@ apt:
   libgtk-3-dev
 
 installed: -text -parsec -Cabal
+distribution: jammy
