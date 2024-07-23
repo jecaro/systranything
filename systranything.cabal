@@ -57,7 +57,7 @@ executable systranything
     gi-glib >= 2.0.29 && < 2.1,
     gi-gobject >= 2.0.30 && < 2.1,
     gi-gtk >= 3.0.39 && < 3.1,
-    optparse-applicative >= 0.17.1 && < 0.18,
+    optparse-applicative >= 0.17.1 && < 0.19,
     text >= 2.0.2 && < 2.1,
     typed-process >= 0.2.11 && < 0.3,
     unliftio >= 0.2.25 && < 0.3,
