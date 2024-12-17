@@ -2,6 +2,7 @@
 
 [![nix][status-nix-png]][status-nix] 
 [![haskell-ci][status-haskell-ci-png]][status-haskell-ci]
+[![hackage][hackage-png]][hackage]
 
 `systranything` lets you put anything in your system tray. It is supported by 
 all destop environment that implements the [StatusNotifierHost 
@@ -67,12 +68,15 @@ build the project and `haskell-language-server` for a better developer
 experience.
 
 [freedesktop]: https://www.freedesktop.org/wiki/
+[hackage-png]: https://img.shields.io/hackage/v/systranything
+[hackage]: https://hackage.haskell.org/package/systranything
 [kde]: https://kde.org/
 [nix]: https://nixos.org/
 [polybar]: https://polybar.github.io/
-[status-notifier-host]: https://www.freedesktop.org/wiki/Specifications/StatusNotifierItem/StatusNotifierHost/
-[status-nix-png]: https://github.com/jecaro/systranything/workflows/nix/badge.svg
 [status-haskell-ci-png]: https://github.com/jecaro/systranything/workflows/Haskell-CI/badge.svg
-[xfce]: https://www.xfce.org/
-[status-nix]: https://github.com/jecaro/systranything/actions/workflows/nix.yml
 [status-haskell-ci]: https://github.com/jecaro/systranything/actions/workflows/haskell-ci.yml
+[status-nix-png]: https://github.com/jecaro/systranything/workflows/nix/badge.svg
+[status-nix]: https://github.com/jecaro/systranything/actions/workflows/nix.yml
+[status-notifier-host]: https://www.freedesktop.org/wiki/Specifications/StatusNotifierItem/StatusNotifierHost/
+[xfce]: https://www.xfce.org/
+
