@@ -1,5 +1,5 @@
 {
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
   outputs = { self, nixpkgs }:
     let
       supportedSystems = [ "x86_64-linux" "x86_64-darwin" ];
@@ -57,11 +57,11 @@
           packages = p: [ self.packages.${system}.systranything ];
           withHoogle = true;
           buildInputs = [
-            pkgs.gnome.zenity
             pkgs.haskellPackages.cabal-install
             pkgs.haskellPackages.ghcid
             pkgs.haskellPackages.haskell-ci
             pkgs.haskellPackages.haskell-language-server
+            pkgs.zenity
           ];
         });
     };
