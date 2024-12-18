@@ -15,15 +15,11 @@
     {
       overlay = (final: prev:
         let
-          gi-ayatana-appindicator3 = prev.haskellPackages.callHackageDirect
-            {
-              pkg = "gi-ayatana-appindicator3";
-              ver = "0.1.0";
-              sha256 = "sha256-Jcv6hUtyCvfkgbvQqo5H+J8h9rrPAkQdOeheWcqMphg=";
-            }
-            {
-              ayatana-appindicator3 = prev.libayatana-appindicator;
-            };
+          gi-ayatana-appindicator3 =
+            prev.haskell.lib.unmarkBroken
+              (prev.haskell.lib.addPkgconfigDepend
+                prev.haskellPackages.gi-ayatana-appindicator3
+                prev.libayatana-appindicator);
         in
         {
           # genBuildInfo translates the line in pkg.info:
