@@ -42,11 +42,14 @@ executable systranything
     Model.Internal
     Model.Item
     Model.Label
-    Model.RadioGroup
     Model.RadioButton
+    Model.RadioGroup
     Model.Root
     Model.SubMenu
     Options
+    Paths_systranything
+  autogen-modules:
+    Paths_systranything
   build-depends:
     aeson >= 2.1.2 && < 2.2,
     base >= 4.16 && < 5,
