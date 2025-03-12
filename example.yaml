@@ -7,7 +7,7 @@ indicator:
   # icon
   command:
     # Run every 3 seconds
-    pooling-interval: 3
+    polling-interval: 3
     # The other icons
     icons:
     - dialog-error

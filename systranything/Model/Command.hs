@@ -19,7 +19,7 @@ import Text.Read (readMaybe)
 
 data Command = MkCommand
   { coOnTimeout :: Text,
-    coPoolingInterval :: Word32,
+    coPollingInterval :: Word32,
     coIcons :: [Text]
   }
   deriving stock (Generic, Show)
@@ -28,7 +28,7 @@ $(deriveJSON options ''Command)
 
 periodicallyUpdateIcon :: Bool -> AI.Indicator -> Text -> Command -> IO ()
 periodicallyUpdateIcon verbose indicator icon MkCommand {..} =
-  void . GLib.timeoutAddSeconds GLib.PRIORITY_DEFAULT coPoolingInterval $ do
+  void . GLib.timeoutAddSeconds GLib.PRIORITY_DEFAULT coPollingInterval $ do
     mbOutput <- runCommand verbose coOnTimeout
 
     let newIcon = fromMaybe icon $ fromIndex =<< toInt =<< mbOutput
