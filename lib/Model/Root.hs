@@ -13,6 +13,6 @@ data Root = MkRoot
   { roIndicator :: Indicator,
     roMenu :: Maybe (NonEmpty Item)
   }
-  deriving stock (Generic, Show)
+  deriving stock (Eq, Generic, Show)
 
 $(deriveJSON options ''Root)

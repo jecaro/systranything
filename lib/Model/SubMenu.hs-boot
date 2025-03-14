@@ -1,9 +1,11 @@
 module Model.SubMenu where
 
 import Data.Aeson (FromJSON, ToJSON)
-import qualified GI.Gtk as Gtk
+import GI.Gtk qualified as Gtk
 
 data SubMenu
+
+instance Eq SubMenu
 
 instance Show SubMenu
 

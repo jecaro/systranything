@@ -8,9 +8,9 @@ import Data.Foldable (traverse_)
 import Data.IORef (newIORef, readIORef, writeIORef)
 import Data.Text (Text)
 import GHC.Generics (Generic)
-import qualified GI.AyatanaAppIndicator3 as AI
-import qualified GI.Gdk as Gdk
-import qualified GI.Gtk as Gtk
+import GI.AyatanaAppIndicator3 qualified as AI
+import GI.Gdk qualified as Gdk
+import GI.Gtk qualified as Gtk
 import Model.Command (Command, periodicallyUpdateIcon)
 import Model.Common (runCommand)
 import Model.Internal (options)
@@ -21,7 +21,7 @@ data Indicator = MkIndicator
     inOnScrollUp :: Maybe Text,
     inOnScrollDown :: Maybe Text
   }
-  deriving stock (Generic, Show)
+  deriving stock (Eq, Generic, Show)
 
 $(deriveJSON options ''Indicator)
 

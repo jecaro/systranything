@@ -6,24 +6,24 @@ import Control.Monad (void, when)
 import Data.Aeson.TH (deriveJSON)
 import Data.Foldable (traverse_)
 import Data.List.NonEmpty (NonEmpty (..))
-import qualified Data.List.NonEmpty as NE
+import Data.List.NonEmpty qualified as NE
 import Data.Maybe (fromMaybe)
 import Data.Text (Text)
 import Foreign.C (CULong)
 import GHC.Generics (Generic)
-import qualified GI.GObject as GI
-import qualified GI.Gtk as Gtk
+import GI.GObject qualified as GI
+import GI.Gtk qualified as Gtk
 import Model.Common (runCommand)
 import Model.Internal (options)
 import Model.RadioButton (RadioButton (..))
-import qualified Model.RadioButton as RadioButton
+import Model.RadioButton qualified as RadioButton
 
 data RadioGroup = MkRadioGroup
   { raButtons :: NonEmpty RadioButton,
     raDefault :: Text,
     raOnGetStatus :: Text
   }
-  deriving stock (Generic, Show)
+  deriving stock (Eq, Generic, Show)
 
 $(deriveJSON options ''RadioGroup)
 

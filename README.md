@@ -28,12 +28,12 @@ What you can do with it:
 - a menu to toggle dual monitor setups
 - anything that requires a status icon and scriptable actions
 
-See [the example file](example.yaml) to get started.
+See [the example file](./tests/data/example.yaml) to get started.
 
 Run it with:
 
 ```bash
-$ systranything -f ./example.yaml
+$ systranything -f ./tests/data/example.yaml
 ```
 
 It has a verbose mode which can be turned on with `-v`. It writes on `stdout` 

@@ -6,7 +6,7 @@ import Control.Monad (void)
 import Data.Aeson.TH (deriveJSON)
 import Data.Text (Text)
 import GHC.Generics (Generic)
-import qualified GI.Gtk as Gtk
+import GI.Gtk qualified as Gtk
 import Model.Common (runCommand)
 import Model.Internal (options)
 
@@ -14,7 +14,7 @@ data Label = MkLabel
   { laLabel :: Text,
     laOnClick :: Text
   }
-  deriving stock (Generic, Show)
+  deriving stock (Eq, Generic, Show)
 
 $(deriveJSON options ''Label)
 

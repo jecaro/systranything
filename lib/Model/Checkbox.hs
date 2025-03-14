@@ -5,11 +5,11 @@ module Model.Checkbox (Checkbox (..), newItem) where
 import Control.Monad (void)
 import Data.Aeson.TH (deriveJSON)
 import Data.Text (Text)
-import qualified Data.Text as T
+import Data.Text qualified as T
 import Foreign.C (CULong)
 import GHC.Generics (Generic)
-import qualified GI.GObject as GObject
-import qualified GI.Gtk as Gtk
+import GI.GObject qualified as GObject
+import GI.Gtk qualified as Gtk
 import Model.Common (runCommand)
 import Model.Internal (options)
 
@@ -18,7 +18,7 @@ data Checkbox = MkCheckbox
     chOnClick :: Text,
     chOnGetStatus :: Text
   }
-  deriving stock (Generic, Show)
+  deriving stock (Eq, Generic, Show)
 
 $(deriveJSON options ''Checkbox)
 

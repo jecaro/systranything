@@ -8,11 +8,11 @@ import Data.List.NonEmpty (NonEmpty (..))
 import Data.List.NonEmpty.Extra ((!?))
 import Data.Maybe (fromMaybe)
 import Data.Text (Text)
-import qualified Data.Text as T
+import Data.Text qualified as T
 import Data.Word (Word32)
 import GHC.Generics (Generic)
-import qualified GI.AyatanaAppIndicator3 as AI
-import qualified GI.GLib as GLib
+import GI.AyatanaAppIndicator3 qualified as AI
+import GI.GLib qualified as GLib
 import Model.Common (runCommand)
 import Model.Internal (options)
 import Text.Read (readMaybe)
@@ -22,7 +22,7 @@ data Command = MkCommand
     coPollingInterval :: Word32,
     coIcons :: [Text]
   }
-  deriving stock (Generic, Show)
+  deriving stock (Eq, Generic, Show)
 
 $(deriveJSON options ''Command)
 

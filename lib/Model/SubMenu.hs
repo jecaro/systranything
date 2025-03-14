@@ -6,7 +6,7 @@ import Data.Aeson.TH (deriveJSON)
 import Data.List.NonEmpty (NonEmpty)
 import Data.Text (Text)
 import GHC.Generics (Generic)
-import qualified GI.Gtk as Gtk
+import GI.Gtk qualified as Gtk
 import Model.Internal (options)
 import Model.Item (Item, populate)
 
@@ -14,7 +14,7 @@ data SubMenu = MkSubMenu
   { suLabel :: Text,
     suItems :: NonEmpty Item
   }
-  deriving stock (Generic, Show)
+  deriving stock (Eq, Generic, Show)
 
 $(deriveJSON options ''SubMenu)
 

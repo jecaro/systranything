@@ -5,14 +5,14 @@ module Model.RadioButton (RadioButton (..), newItem) where
 import Data.Aeson.TH (deriveJSON)
 import Data.Text (Text)
 import GHC.Generics (Generic)
-import qualified GI.Gtk as Gtk
+import GI.Gtk qualified as Gtk
 import Model.Internal (options)
 
 data RadioButton = MkRadioButton
   { raLabel :: Text,
     raOnClick :: Text
   }
-  deriving stock (Generic, Show)
+  deriving stock (Eq, Generic, Show)
 
 $(deriveJSON options ''RadioButton)
 
