@@ -52,7 +52,7 @@ onScrollEvent verbose indicator (MkIndicator {..}) = do
 
   refDirection <- newIORef Gdk.ScrollDirectionDown
 
-  void . Gtk.on indicator #scrollEvent $ \_ direction -> do
+  void $ Gtk.on indicator #scrollEvent $ \_ direction -> do
     when (direction /= Gdk.ScrollDirectionSmooth) $ do
       writeIORef refDirection direction
 

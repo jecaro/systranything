@@ -39,4 +39,4 @@ newItem verbose MkCheckbox {..} = do
 
 runCommandOnToggle :: Bool -> Text -> Gtk.CheckMenuItem -> IO CULong
 runCommandOnToggle verbose command item =
-  Gtk.on item #toggled . void $ runCommand verbose command
+  Gtk.on item #toggled $ void $ runCommand verbose command

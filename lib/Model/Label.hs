@@ -21,5 +21,5 @@ $(deriveJSON options ''Label)
 newItem :: Bool -> Label -> IO Gtk.MenuItem
 newItem verbose MkLabel {..} = do
   item <- Gtk.menuItemNewWithLabel laLabel
-  void . Gtk.on item #activate . void $ runCommand verbose laOnClick
+  void $ Gtk.on item #activate $ void $ runCommand verbose laOnClick
   pure item

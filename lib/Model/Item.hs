@@ -34,7 +34,7 @@ populate :: Bool -> NonEmpty Item -> IO Gtk.Menu
 populate verbose items = do
   menu <- Gtk.menuNew
   updateStateActions <- traverse (initAppendAndShow menu) items
-  void . Gtk.on menu #show $ sequence_ updateStateActions
+  void $ Gtk.on menu #show $ sequence_ updateStateActions
   pure menu
   where
     initAppendAndShow :: Gtk.Menu -> Item -> IO (IO ())
