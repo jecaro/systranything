@@ -117,6 +117,7 @@ test-suite tests
   main-is:
     Main.hs
   other-modules:
+    Tests.Model.Common
     Tests.Model.Root
   ghc-options: -F -pgmF=tasty-autocollect
   build-tool-depends:
