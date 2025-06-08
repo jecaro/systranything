@@ -4,4 +4,6 @@ apt:
   libgtk-3-dev
 
 installed: -text -parsec -Cabal
-distribution: jammy
+-- WARNING the noble distribution is not supported yet
+-- distribution: jammy
+
