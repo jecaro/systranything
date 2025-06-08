@@ -76,10 +76,10 @@ library
     bytestring >= 0.11.5 && < 0.13,
     extra >= 1.7.16 && < 1.8,
     gi-ayatana-appindicator3 >= 0.1.1 && < 0.2,
-    gi-gdk >= 3.0.29 && < 3.1,
+    gi-gdk3 >= 3.0.29 && < 3.1,
     gi-glib >= 2.0.30 && < 2.1,
     gi-gobject >= 2.0.31 && < 2.1,
-    gi-gtk >= 3.0.43 && < 3.1,
+    gi-gtk3 >= 3.0.43 && < 3.1,
     text >= 2.0.2 && < 2.2,
     typed-process >= 0.2.11 && < 0.3,
 
@@ -98,7 +98,7 @@ executable systranything
   build-depends:
     base,
     gi-glib,
-    gi-gtk,
+    gi-gtk3,
     optparse-applicative >= 0.18.1 && < 0.19,
     systranything,
     unliftio >= 0.2.25 && < 0.3,
@@ -126,7 +126,7 @@ test-suite tests
     base,
     hspec-expectations >= 0.8.4 && < 0.9,
     systranything,
-    tasty >= 1.4.3 && < 1.5,
+    tasty >= 1.4.3 && < 1.6,
     tasty-hunit-compat >= 0.2.0 && < 0.3,
     text,
     yaml
