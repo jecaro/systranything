@@ -14,23 +14,10 @@
     in
     {
       overlay = (final: prev:
-        let
-          gi-ayatana-appindicator3 =
-            prev.haskell.lib.unmarkBroken
-              (prev.haskell.lib.addPkgconfigDepend
-                prev.haskellPackages.gi-ayatana-appindicator3
-                prev.libayatana-appindicator);
-        in
         {
-          # genBuildInfo translates the line in pkg.info:
-          #   "pkgconfigDepends": "ayatana-appindicator3-0.1"
-          # to the pkg-config dependency: "ayatana-appindicator3"
-          # however the nixpkgs package is actually libayatana-appindicator
           systranything = prev.haskellPackages.callCabal2nix
             "systranything" ./.
-            {
-              inherit gi-ayatana-appindicator3;
-            };
+            { };
         });
 
       packages = forAllSystems
