@@ -6,4 +6,5 @@ apt:
 installed: -text -parsec -Cabal
 -- WARNING the noble distribution is not supported yet
 -- distribution: jammy
+unconstrained: False
 
