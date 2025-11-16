@@ -120,8 +120,6 @@ test-suite tests
     Tests.Model.Common
     Tests.Model.Root
   ghc-options: -F -pgmF=tasty-autocollect
-  build-tool-depends:
-    tasty-autocollect:tasty-autocollect
   build-depends:
     base,
     hspec-expectations >= 0.8.4 && < 0.9,
