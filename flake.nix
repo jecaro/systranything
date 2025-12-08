@@ -1,6 +1,10 @@
 {
   inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
-  outputs = { self, nixpkgs }:
+  inputs.haskell-ci-src = {
+    url = "github:haskell-CI/haskell-ci";
+    flake = false;
+  };
+  outputs = { self, haskell-ci-src, nixpkgs }:
     let
       supportedSystems = [ "x86_64-linux" "x86_64-darwin" ];
 
@@ -35,7 +39,30 @@
 
       devShells = forAllSystems
         (system:
-          let pkgs = nixpkgsFor.${system};
+          let
+            pkgs = nixpkgsFor.${system};
+
+            cabal-install-parsers = pkgs.haskell.lib.dontCheck (
+              pkgs.haskell.lib.doJailbreak (
+                pkgs.haskellPackages.callCabal2nix
+                  "cabal-install-parsers"
+                  "${haskell-ci-src}/cabal-install-parsers"
+                  { }
+              ));
+            haskell-ci =
+              pkgs.haskell.lib.doJailbreak (
+                (pkgs.haskellPackages.callCabal2nix
+                  "haskell-ci"
+                  haskell-ci-src
+                  {
+                    inherit cabal-install-parsers;
+                  }).overrideAttrs (oldAttrs: {
+                  # Being behind a flag makes the failbreaking not working
+                  postPatch = oldAttrs.postPatch or "" + ''
+                    substituteInPlace haskell-ci.cabal --replace "ShellCheck ==0.10.0" "ShellCheck"
+                  '';
+                })
+              );
           in
           {
             # Default shell for development
@@ -43,9 +70,9 @@
               packages = p: [ self.packages.${system}.systranything ];
               withHoogle = true;
               buildInputs = [
+                haskell-ci
                 pkgs.haskellPackages.cabal-install
                 pkgs.haskellPackages.ghcid
-                pkgs.haskellPackages.haskell-ci
                 pkgs.haskellPackages.haskell-language-server
                 pkgs.zenity
               ];
@@ -83,3 +110,6 @@
         );
     };
 }
+
+
+

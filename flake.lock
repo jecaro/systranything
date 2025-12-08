@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "haskell-ci-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1763555880,
+        "narHash": "sha256-7qCUkOKR5sdOQlhfc9zrRHBF5CSqSGo86ZdO4VF0fFA=",
+        "owner": "haskell-CI",
+        "repo": "haskell-ci",
+        "rev": "e047d3d80f6a0521ec31aa51eaef15660431ed78",
+        "type": "github"
+      },
+      "original": {
+        "owner": "haskell-CI",
+        "repo": "haskell-ci",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1764983851,
@@ -18,6 +34,7 @@
     },
     "root": {
       "inputs": {
+        "haskell-ci-src": "haskell-ci-src",
         "nixpkgs": "nixpkgs"
       }
     }
