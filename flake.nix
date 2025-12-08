@@ -79,7 +79,7 @@
             };
           } //
           # Additional shells for the compiler versions we support
-          pkgs.lib.attrsets.genAttrs [ "ghc948" "ghc964" "ghc982" ] (
+          pkgs.lib.attrsets.genAttrs [ "ghc984" "ghc9103" "ghc9122" ] (
             ghc: pkgs.haskell.packages.${ghc}.shellFor {
               # No package in scope. One need to call `cabal update` and start
               # for here.

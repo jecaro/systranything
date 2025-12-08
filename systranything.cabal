@@ -15,9 +15,9 @@ description:
   contains the specification of the menu items with shell commands to execute
   when the items are clicked.
 tested-with:
-  GHC == 9.4.8,
-  GHC == 9.6.4,
-  GHC == 9.8.2
+  GHC == 9.8.4,
+  GHC == 9.10.3,
+  GHC == 9.12.2
 extra-source-files:
   cabal.project
 extra-doc-files:
@@ -120,18 +120,15 @@ test-suite tests
     Tests.Model.Common
     Tests.Model.Root
   ghc-options: -F -pgmF=tasty-autocollect
+  build-tool-depends:
+    tasty-autocollect:tasty-autocollect
   build-depends:
     base,
     hspec-expectations >= 0.8.4 && < 0.9,
     systranything,
     tasty >= 1.4.3 && < 1.6,
+    tasty-autocollect >= 0.4.3 && < 0.5,
     tasty-hunit-compat >= 0.2.0 && < 0.3,
     text,
-    yaml
-  if impl(ghc < 9.6)
-    build-depends:
-      tasty-autocollect == 0.4.2
-  else
-    build-depends:
-      tasty-autocollect >= 0.4.3 && < 0.5
+    yaml,
 
