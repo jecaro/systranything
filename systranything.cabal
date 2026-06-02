@@ -15,9 +15,9 @@ description:
   contains the specification of the menu items with shell commands to execute
   when the items are clicked.
 tested-with:
-  GHC == 9.8.4,
-  GHC == 9.10.3,
-  GHC == 9.12.2
+  GHC == 9.10.1,
+  GHC == 9.12.1,
+  GHC == 9.14.1
 extra-source-files:
   cabal.project
 extra-doc-files:
