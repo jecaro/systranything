@@ -79,7 +79,7 @@
             };
           } //
           # Additional shells for the compiler versions we support
-          pkgs.lib.attrsets.genAttrs [ "ghc984" "ghc9103" "ghc9122" ] (
+          pkgs.lib.attrsets.genAttrs [ "ghc9103" "ghc9124" "ghc9141" ] (
             ghc: pkgs.haskell.packages.${ghc}.shellFor {
               # No package in scope. One need to call `cabal update` and start
               # for here.
@@ -93,17 +93,22 @@
                 pkgs.lerc
                 pkgs.libayatana-appindicator
                 pkgs.libdatrie
+                pkgs.libdeflate
                 pkgs.libepoxy
                 pkgs.libselinux
                 pkgs.libsepol
                 pkgs.libsysprof-capture
                 pkgs.libthai
+                pkgs.libwebp
+                pkgs.libxdmcp
                 pkgs.libxkbcommon
+                pkgs.libxtst
                 pkgs.pcre2
                 pkgs.pkg-config
+                pkgs.systemd
                 pkgs.util-linux
-                pkgs.xorg.libXdmcp
-                pkgs.xorg.libXtst
+                pkgs.xz
+                pkgs.zstd
               ];
             }
           )
