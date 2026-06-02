@@ -1,5 +1,5 @@
 {
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
   inputs.haskell-ci-src = {
     url = "github:haskell-CI/haskell-ci";
     flake = false;
