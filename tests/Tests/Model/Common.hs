@@ -1,16 +1,10 @@
-{- AUTOCOLLECT.TEST -}
-
-module Tests.Model.Common
-  (
-  {- AUTOCOLLECT.TEST.export -}
-  )
-where
+module Tests.Model.Common (test) where
 
 import Data.IORef (modifyIORef, newIORef, readIORef)
 import Data.Text qualified as Text
 import Model.Common (runCommand')
 import Test.Hspec.Expectations (shouldBe, shouldSatisfy)
-import Test.Tasty (testGroup)
+import Test.Tasty (TestTree, testGroup)
 import Test.Tasty.HUnit (testCase)
 
 test :: TestTree

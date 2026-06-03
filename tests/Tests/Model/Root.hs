@@ -1,10 +1,4 @@
-{- AUTOCOLLECT.TEST -}
-
-module Tests.Model.Root
-  (
-  {- AUTOCOLLECT.TEST.export -}
-  )
-where
+module Tests.Model.Root (test) where
 
 import Data.List.NonEmpty (NonEmpty (..))
 import Data.Text as Text (unlines)
@@ -19,6 +13,7 @@ import Model.RadioGroup (RadioGroup (..))
 import Model.Root (Root (..))
 import Model.SubMenu (SubMenu (..))
 import Test.Hspec.Expectations (shouldBe)
+import Test.Tasty (TestTree)
 import Test.Tasty.HUnit (testCase)
 
 test :: TestTree
