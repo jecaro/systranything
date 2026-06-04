@@ -14,9 +14,10 @@
 #
 name: Haskell-CI
 on:
-  - push
-  - pull_request
-  - merge_group
+  pull_request:
+  push:
+    branches:
+      - main
 jobs:
   linux:
     name: Haskell-CI - Linux - ${{ matrix.compiler }}
