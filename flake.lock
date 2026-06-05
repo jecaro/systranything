@@ -3,11 +3,11 @@
     "haskell-ci-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1763555880,
-        "narHash": "sha256-7qCUkOKR5sdOQlhfc9zrRHBF5CSqSGo86ZdO4VF0fFA=",
+        "lastModified": 1776264067,
+        "narHash": "sha256-t1urzATbWwdRWkpCygg2kLZ3i8/0qG9ZOjDsNpnUBt0=",
         "owner": "haskell-CI",
         "repo": "haskell-ci",
-        "rev": "e047d3d80f6a0521ec31aa51eaef15660431ed78",
+        "rev": "30692865b767dcab15086e63f2f4fd3d3d1fe8a5",
         "type": "github"
       },
       "original": {
@@ -18,11 +18,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1780203844,
-        "narHash": "sha256-K5sT4jTpGs15ADhviMKNBH38REpPf5Q6mM1+N6cArVE=",
+        "lastModified": 1780453794,
+        "narHash": "sha256-bXMRa9VTsHSPXL4Cw8R6JJLQeY3Y/IP4+YJCYVmQ7FY=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "b51242d7d43689db2f3be91bd05d5b24fbb469c4",
+        "rev": "6b316287bae2ee04c9b93c8c858d930fd07d7338",
         "type": "github"
       },
       "original": {
