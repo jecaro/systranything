@@ -3,11 +3,11 @@
     "haskell-ci-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1782148688,
-        "narHash": "sha256-o1PdJSAFpgOmuscCnW+sdqidrmQCpV+iKKsjbtV7LKI=",
+        "lastModified": 1782299874,
+        "narHash": "sha256-sQNh/Zd1S0fNe/ietbCvyqg+0/tglRyCmFPb3AD/5wc=",
         "owner": "haskell-CI",
         "repo": "haskell-ci",
-        "rev": "3f5aea477e307adec15751280d60104986ac0f24",
+        "rev": "42a102e53821381a5f47bdeeadd775cf649c76df",
         "type": "github"
       },
       "original": {
